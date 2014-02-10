@@ -25,7 +25,4 @@ endif
 
 # LOG_NDEBUG=0 means verbose logging enabled
 # LOCAL_CFLAGS += -DLOG_NDEBUG=0
-
-LOCAL_CFLAGS += -O3 -fmodulo-sched -fmodulo-sched-allow-regmoves
-
 include $(BUILD_SHARED_LIBRARY)

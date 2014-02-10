@@ -34,8 +34,8 @@
 #include <hardware/hwcomposer.h>
 #include "hal_public.h"
 #else
-#include "hwcomposer.h"
-#include "buffer_handle.h"
+#include <hwcomposer.h>
+#include <buffer_handle.h>
 #define ALIGN(x,a) (((x) + (a) - 1L) & ~((a) - 1L))
 #define HW_ALIGN   32
 #endif
