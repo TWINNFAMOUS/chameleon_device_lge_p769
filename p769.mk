@@ -128,10 +128,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libstagefrighthw
 
-#copy firmware
-PRODUCT_COPY_FILES += \
-  system/bluetooth/data/main.conf:system/etc/bluetooth/main.conf
-
 # Charger mode
 PRODUCT_PACKAGES += \
     charger \

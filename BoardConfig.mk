@@ -10,8 +10,8 @@ TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_BOOTLOADER_BOARD_NAME := p769
 TARGET_CPU_SMP := true
-TARGET_CPU_VARIANT := cortex-a9
 TARGET_ARCH := arm
+TARGET_CPU_VARIANT := cortex-a9
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_ARCH_VARIANT_CPU := $(TARGET_CPU_VARIANT)
 TARGET_ARCH_VARIANT_FPU := neon
@@ -19,7 +19,7 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 NEEDS_ARM_ERRATA_754319_754320 := true
 BOARD_GLOBAL_CFLAGS += -DNEEDS_ARM_ERRATA_754319_754320
 
-BOARD_KERNEL_CMDLINE :=
+BOARD_KERNEL_CMDLINE := androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 2048
 
@@ -41,13 +41,16 @@ BOARD_BLUEDROID_VENDOR_CONF := device/lge/p769/bluetooth/vnd_lge_p769.txt
 BOARD_HAS_NO_MISC_PARTITION := true
 
 TARGET_RECOVERY_FSTAB = device/lge/p769/fstab.u2
-RECOVERY_FSTAB_VERSION = 2 
+RECOVERY_FSTAB_VERSION = 2
+DEVICE_RESOLUTION := 540x960
+BOARD_HAS_NO_SELECT_BUTTON := true
+TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
+BOARD_UMS_LUNFILE := "/sys/devices/virtual/android_usb/android0/f_mass_storage/lun%d/file"
 
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 
-TARGET_BOOTLOADER_BOARD_NAME := p769
-
 BOARD_EGL_CFG := device/lge/p769/egl.cfg
+BOARD_EGL_WORKAROUND_BUG_10194508 := true
 
 TARGET_USES_GL_VENDOR_EXTENSIONS := false
 
@@ -63,6 +66,7 @@ WIFI_DRIVER_FW_PATH_STA := "/system/etc/firmware/fw_bcmdhd_p2p.bin"
 WIFI_DRIVER_FW_PATH_P2P := "/system/etc/firmware/fw_bcmdhd_p2p.bin"
 WIFI_DRIVER_FW_PATH_AP := "/system/etc/firmware/fw_bcmdhd_apsta.bin"
 BOARD_LEGACY_NL80211_STA_EVENTS := true
+WIFI_BAND := 802_11_ABG
 
 OMAP_ENHANCEMENT := true
 OMAP_ENHANCEMENT_CPCAM := true
@@ -87,7 +91,12 @@ TARGET_SPECIFIC_HEADER_PATH := device/lge/p769/include
 
 BOARD_HAS_VIBRATOR_IMPLEMENTATION := ../../device/lge/p769/vibrator.c
 
-COMMON_GLOBAL_CFLAGS += -DICS_CAMERA_BLOB
+COMMON_GLOBAL_CFLAGS += -DICS_CAMERA_BLOB 
+
+COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
+
+# Force the screenshot path to CPU consumer
+COMMON_GLOBAL_CFLAGS += -DFORCE_SCREENSHOT_CPU_PATH
 
 
 KERNEL_SGX_MODULES:
@@ -107,9 +116,24 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/android0/f_mass_storag
 BOARD_CUSTOM_GRAPHICS := ../../../device/lge/p769/recovery-gfx.c
 BOARD_CHARGER_ENABLE_SUSPEND := true
 
+# Charging
+COMMON_GLOBAL_CFLAGS += -DBOARD_CHARGING_CMDLINE_NAME='"chg"' -DBOARD_CHARGING_CMDLINE_VALUE='"68"'
+
+# Security Enhanced Linux
+#BOARD_SEPOLICY_DIRS := \
+    device/lge/p769/selinux
+
+#BOARD_SEPOLICY_UNION := \
+    file_contexts \
+    pvrsrvinit.te \
+    device.te \
+    domain.te
+    
 BOARD_HARDWARE_CLASS := device/lge/p769/cmhw/
 
 ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
 
+
 # p940 included to support some widely used generic CWM recovery
 TARGET_OTA_ASSERT_DEVICE := p769,p760,u2,p940
+
