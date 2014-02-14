@@ -32,8 +32,6 @@ TARGET_KERNEL_SOURCE := kernel/lge/omap4-common
 # toolchain for kernel, must be in prebuilt\linux-x86\toolchain\
 TARGET_KERNEL_CUSTOM_TOOLCHAIN := linaro-4.7
 
-BOARD_HAS_NO_SELECT_BUTTON := true
-
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUEDROID_VENDOR_CONF := device/lge/p769/bluetooth/vnd_lge_p769.txt
