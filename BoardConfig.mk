@@ -85,8 +85,7 @@ USE_OPENGL_RENDERER := true
 #BOARD_TOUCH_RECOVERY := true
 #ENHANCED_DOMX := true
 
-# Enable WEBGL in WebKit
-ENABLE_WEBGL := true
+SUPERUSER_PACKAGE := com.mypackagename.superuser
 
 TARGET_SPECIFIC_HEADER_PATH := device/lge/p769/include
 

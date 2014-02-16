@@ -127,7 +127,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     libstagefrighthw
-
+    
 # Charger mode
 PRODUCT_PACKAGES += \
     charger \
